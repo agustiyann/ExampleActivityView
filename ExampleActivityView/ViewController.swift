@@ -15,7 +15,11 @@ class ViewController: UIViewController {
     private lazy var today = calendar.date(byAdding: .day, value: 0, to: Date())!
     private let aug_23_2023 = Date.fromString("2023-08-23", format: "yyyy-MM-dd")!
     
-    private lazy var highlightedDates: [Date] = [twoDaysAgo, oneDayAgo, today, aug_23_2023]
+    private lazy var highlightedDates: [Date] = [twoDaysAgo, oneDayAgo, today, aug_23_2023] {
+        didSet {
+            calendarActivityView.reload()
+        }
+    }
     
     private let calendarActivityView: CalendarActivityView = {
         var config = CalendarActivityConfig()
