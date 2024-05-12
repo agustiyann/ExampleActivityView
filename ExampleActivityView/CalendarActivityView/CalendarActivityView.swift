@@ -56,7 +56,7 @@ class CalendarActivityView: UIView {
     
     weak var delegate: CalendarActivityViewDelegate?
     
-    init(config: CalendarActivityConfig = CalendarActivityConfig(), startDate: Date, endDate: Date = Date()) {
+    init(config: CalendarActivityConfig = CalendarActivityConfig(), startDate: Date = Date().addingTimeInterval(-365 * 24 * 60 * 60), endDate: Date = Date()) {
         self.config = config
         self.startDate = startDate
         self.endDate = endDate

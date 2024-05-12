@@ -18,21 +18,22 @@ class ViewController: UIViewController {
     private lazy var highlightedDates: [Date] = [twoDaysAgo, oneDayAgo, today, aug_23_2023]
     
     private let calendarActivityView: CalendarActivityView = {
-        let startDate = Date().addingTimeInterval(-365 * 24 * 60 * 60)
         var config = CalendarActivityConfig()
         config.contentRightInset = 16
-        let view = CalendarActivityView(config: config, startDate: startDate)
+        config.monthStrings = DateFormatter().shortMonthSymbols
+        
+        let view = CalendarActivityView(config: config)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private let selectedDateLabel: UILabel = {
-        let view = UILabel()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.text = "You selected:"
-        view.font = UIFont.preferredFont(forTextStyle: .headline)
-        return view
-    }()
+//    private let selectedDateLabel: UILabel = {
+//        let view = UILabel()
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.text = "You selected:"
+//        view.font = UIFont.preferredFont(forTextStyle: .headline)
+//        return view
+//    }()
     
     private let highlightedDatesLabel: UILabel = {
         let view = UILabel()
@@ -50,7 +51,7 @@ class ViewController: UIViewController {
         highlightedDatesLabel.text = "Highlighted Dates:\n1. Today\n2. One day ago\n3. Two days ago\n4. 23 Aug 2023"
         
         view.addSubview(calendarActivityView)
-        view.addSubview(selectedDateLabel)
+//        view.addSubview(selectedDateLabel)
         view.addSubview(highlightedDatesLabel)
         
         NSLayoutConstraint.activate([
@@ -58,11 +59,11 @@ class ViewController: UIViewController {
             calendarActivityView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             calendarActivityView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            selectedDateLabel.topAnchor.constraint(equalTo: calendarActivityView.bottomAnchor, constant: 16),
-            selectedDateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            selectedDateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            selectedDateLabel.topAnchor.constraint(equalTo: calendarActivityView.bottomAnchor, constant: 16),
+//            selectedDateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+//            selectedDateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            highlightedDatesLabel.topAnchor.constraint(equalTo: selectedDateLabel.bottomAnchor, constant: 16),
+            highlightedDatesLabel.topAnchor.constraint(equalTo: calendarActivityView.bottomAnchor, constant: 16),
             highlightedDatesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             highlightedDatesLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
@@ -84,14 +85,14 @@ extension ViewController: CalendarActivityViewDelegate {
         }
     }
     
-    func didSelectedAt(dateComponents: DateComponents) {
-        guard let year = dateComponents.year,
-            let month = dateComponents.month,
-            let day = dateComponents.day else { return }
-        // do something here
-        print(day, month, year)
-        selectedDateLabel.text = "You selected: \(day)-\(month)-\(year)"
-    }
+//    func didSelectedAt(dateComponents: DateComponents) {
+//        guard let year = dateComponents.year,
+//            let month = dateComponents.month,
+//            let day = dateComponents.day else { return }
+//        // do something here
+//        print(day, month, year)
+//        selectedDateLabel.text = "You selected: \(day)-\(month)-\(year)"
+//    }
     
     func finishLoadCalendar() {
         calendarActivityView.scrollTo(date: today, at: .right, animated: false)

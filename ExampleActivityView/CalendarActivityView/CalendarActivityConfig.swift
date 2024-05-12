@@ -12,8 +12,8 @@ struct CalendarActivityConfig {
     var contentRightInset: CGFloat = 60
     
     // calendar day item
-    var itemSide: CGFloat = 20
-    var itemCornerRadius: CGFloat = 4
+    var itemSide: CGFloat = 12
+    var itemCornerRadius: CGFloat = 2
     var allowItemSelection: Bool = false
     var selectedItemBorderColor: UIColor = .black
     var selectedItemBorderLineWidth: CGFloat = 2
